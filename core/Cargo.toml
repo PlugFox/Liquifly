@@ -73,18 +73,18 @@ debug-assertions = false
 rayon = "1.10"
 
 # FFI with Dart
-allo-isolate = "0.1"
+#allo-isolate = "0.1"
 
 # Atomic operations and lock-free structures
 crossbeam = "0.8"
 
-# Optional: async runtime (if needed for future features)
-# tokio = { version = "1.48.0", features = [
-#     "rt-multi-thread",
-#     "macros",
-#     "sync",
-#     "time",
-# ] }
+# Async runtime for simulation thread management
+tokio = { version = "1.48.0", features = [
+    "rt-multi-thread",  # Multi-threaded runtime
+    "macros",           # Async/await macros
+    "sync",             # Channels and synchronization primitives
+    "time",             # Sleep and interval timers
+] }
 
 # Optional: Logging (uncomment when needed)
 # tracing = "0.1.41"
