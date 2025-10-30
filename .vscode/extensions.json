@@ -1,0 +1,14 @@
+{
+    "recommendations": [
+        // Rust
+        "rust-lang.rust-analyzer",
+        "vadimcn.vscode-lldb",
+        "tamasfe.even-better-toml",
+        // Dart/Flutter
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        // General
+        "editorconfig.editorconfig",
+        "eamodio.gitlens"
+    ]
+}

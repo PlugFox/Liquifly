@@ -1,0 +1,54 @@
+{
+    // Rust analyzer settings for monorepo
+    "rust-analyzer.linkedProjects": [
+        "${workspaceFolder}/core/Cargo.toml"
+    ],
+    "rust-analyzer.cargo.features": "all",
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.checkOnSave.extraArgs": [
+        "--all-targets"
+    ],
+    // Editor settings for Rust
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.formatOnSave": true,
+        "editor.rulers": [
+            120
+        ]
+    },
+    // Editor settings for Dart/Flutter
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            120
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": "off"
+    },
+    // Files to exclude from explorer
+    "files.exclude": {
+        "**/.git": true,
+        "**/target": true,
+        "**/.dart_tool": true,
+        "**/build": true
+    },
+    // Files to exclude from search
+    "search.exclude": {
+        "**/target": true,
+        "**/.dart_tool": true,
+        "**/build": true,
+        "**/Cargo.lock": true
+    },
+    // Terminal settings
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    // File associations
+    "files.associations": {
+        "*.rs": "rust",
+        "Cargo.toml": "toml",
+        "Cargo.lock": "toml"
+    }
+}

@@ -1,5 +1,5 @@
 [package]
-name = "Liquifly"
+name = "liquifly"
 version = "0.0.1"
 description = "A real-time fluid simulation engine written in Rust."
 repository = "https://github.com/PlugFox/Liquifly"
@@ -12,6 +12,18 @@ edition = "2024"
 [lints.rust]
 dead_code = "allow"
 unused_variables = "allow"
+# unsafe_code = "deny"  # Uncomment when ready for strict safety
+# missing_docs = "warn" # Uncomment when ready for documentation
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
+# Allow some noisy lints
+module_name_repetitions = "allow"
+must_use_candidate = "allow"
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
 
 # cargo build (dev profile with some optimizations for faster runtime during development)
 [profile.dev]
@@ -57,29 +69,32 @@ debug-assertions = false
 
 [dependencies]
 
-tokio = { version = "1.48.0", features = [
-    "rt-multi-thread",
-    "macros",
-    "sync",
-    "time",
-    "fs",
-    "io-util",
-    "net",
-    "signal",
-] }
+# Parallelism for physics calculations
+rayon = "1.10"
 
-# Logging
-tracing = "0.1.41"
-tracing-subscriber = { version = "0.3.20", features = [
-    "env-filter",
-    "fmt",
-    "json",
-] }
-tracing-appender = "0.2.3"
-tracing-log = "0.2.0"
+# FFI with Dart
+allo-isolate = "0.1"
 
-# Time handling
-chrono = { version = "0.4.42", features = ["serde"] }
+# Atomic operations and lock-free structures
+crossbeam = "0.8"
+
+# Optional: async runtime (if needed for future features)
+# tokio = { version = "1.48.0", features = [
+#     "rt-multi-thread",
+#     "macros",
+#     "sync",
+#     "time",
+# ] }
+
+# Optional: Logging (uncomment when needed)
+# tracing = "0.1.41"
+# tracing-subscriber = { version = "0.3.20", features = [
+#     "env-filter",
+#     "fmt",
+# ] }
+
+# Optional: Time handling (uncomment when needed)
+# chrono = { version = "0.4.42", features = ["serde"] }
 
 [dev-dependencies]
 tempfile = "3.23.0"

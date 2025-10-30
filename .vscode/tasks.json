@@ -1,0 +1,366 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "core:cargo:build",
+            "detail": "Build Rust library (dev profile)",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:build:release",
+            "detail": "Build Rust library (optimized release)",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "build",
+                "--release"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:build:release-small",
+            "detail": "Build smallest binary (~4.1 MB)",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "build",
+                "--profile",
+                "release-small"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:build:release-fast",
+            "detail": "Build fastest runtime (fat LTO)",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "build",
+                "--profile",
+                "release-fast"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:test",
+            "detail": "Run all Rust tests",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "test"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:test:verbose",
+            "detail": "Run tests with output",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "test",
+                "--",
+                "--nocapture"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:bench",
+            "detail": "Run benchmarks",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "bench"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:clippy",
+            "detail": "Run clippy linter",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "clippy",
+                "--all-targets",
+                "--",
+                "-D",
+                "warnings"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:fmt",
+            "detail": "Format Rust code",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "fmt"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "core:cargo:fmt:check",
+            "detail": "Check Rust formatting without changes",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "fmt",
+                "--",
+                "--check"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "core:cargo:clean",
+            "detail": "Remove build artifacts",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "clean"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "core:cargo:doc",
+            "detail": "Generate and open documentation",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "doc",
+                "--no-deps",
+                "--open"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "core:cargo:check",
+            "detail": "Quick check without building",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "check"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/core"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$rustc"
+            ]
+        },
+        {
+            "label": "app:flutter:pub:get",
+            "detail": "Get Flutter dependencies",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "pub",
+                "get"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "app:flutter:run",
+            "detail": "Run Flutter application",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "run"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "isBackground": true
+        },
+        {
+            "label": "app:flutter:build:apk",
+            "detail": "Build Android APK",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "build",
+                "apk"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "app:flutter:build:ios",
+            "detail": "Build iOS application",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "build",
+                "ios"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "app:flutter:clean",
+            "detail": "Clean Flutter build artifacts",
+            "type": "shell",
+            "command": "flutter",
+            "args": [
+                "clean"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/app"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+# Clippy linting configuration
+
+# Cognitive complexity threshold
+cognitive-complexity-threshold = 30
+
+# Too many arguments threshold
+too-many-arguments-threshold = 8
+
+# Type complexity threshold
+type-complexity-threshold = 500
+
+# Enable checking private items
+check-private-items = true

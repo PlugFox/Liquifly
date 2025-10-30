@@ -1,0 +1,33 @@
+# Rust formatting configuration (stable features only)
+edition = "2024"
+max_width = 100
+hard_tabs = false
+tab_spaces = 4
+newline_style = "Unix"
+
+# Imports
+reorder_imports = true
+
+# Code structure
+use_small_heuristics = "Default"
+
+# Match expressions
+match_block_trailing_comma = true
+
+# Misc
+remove_nested_parens = true
+use_field_init_shorthand = true
+use_try_shorthand = true
+
+# Note: The following features require nightly Rust:
+# - imports_granularity, group_imports
+# - fn_single_line, where_single_line
+# - control_brace_style
+# - normalize_comments, wrap_comments, comment_width
+# - format_strings
+# - binop_separator
+# - overflow_delimited_expr
+# - reorder_impl_items
+#
+# To use them, install nightly: rustup toolchain install nightly
+# And run: cargo +nightly fmt

@@ -1,3 +1,54 @@
 {
-    "configurations": []
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "core:debug:lib",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--lib"
+                ],
+                "filter": {
+                    "name": "liquifly",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/core",
+            "preLaunchTask": "core:cargo:build"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "core:debug:tests",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--lib"
+                ],
+                "filter": {
+                    "name": "liquifly",
+                    "kind": "lib"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/core"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "core:debug:bench",
+            "cargo": {
+                "args": [
+                    "bench",
+                    "--no-run"
+                ]
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}/core"
+        }
+    ]
 }
