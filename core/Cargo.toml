@@ -1,0 +1,85 @@
+[package]
+name = "Liquifly"
+version = "0.0.1"
+description = "A real-time fluid simulation engine written in Rust."
+repository = "https://github.com/PlugFox/Liquifly"
+homepage = "https://plugfox.dev"
+authors = ["Mike Matiunin <plugfox@gmail.com>"]
+license = "MIT"
+edition = "2024"
+
+# Lint settings for the entire project
+[lints.rust]
+dead_code = "allow"
+unused_variables = "allow"
+
+# cargo build (dev profile with some optimizations for faster runtime during development)
+[profile.dev]
+opt-level = 1      # Basic optimizations for reasonable performance
+debug = true       # Keep debug info
+incremental = true # Fast recompilation
+
+# cargo build --release
+# Default binary target - balanced optimization
+# ~ 6.8 MB
+[profile.release]
+opt-level = 3      # Maximum optimization
+lto = "thin"       # Thin LTO - good balance between speed and compile time
+codegen-units = 16 # Parallel codegen for faster builds
+panic = "abort"    # Smaller binary, no unwinding
+strip = true       # Remove debug symbols
+debug = false      # No debug info
+
+# cargo build --profile release-small
+# For smallest binary size (slightly slower runtime, slower compilation)
+# ~ 4.1 MB
+[profile.release-small]
+inherits = "release"
+opt-level = "z"      # Optimize for size
+lto = "fat"          # Full LTO for maximum size reduction
+codegen-units = 1    # Single codegen unit for better optimization
+panic = "abort"
+strip = true
+
+# cargo build --profile release-fast
+# For fastest runtime (larger binary, much slower compilation)
+# Production-ready with maximum performance
+[profile.release-fast]
+inherits = "release"
+opt-level = 3        # Maximum optimization level
+lto = "fat"          # Full LTO for maximum performance
+codegen-units = 1    # Single unit for best optimization
+panic = "abort"
+strip = true
+# Additional performance flags
+overflow-checks = false  # Disable overflow checks in hot paths
+debug-assertions = false
+
+[dependencies]
+
+tokio = { version = "1.48.0", features = [
+    "rt-multi-thread",
+    "macros",
+    "sync",
+    "time",
+    "fs",
+    "io-util",
+    "net",
+    "signal",
+] }
+
+# Logging
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.20", features = [
+    "env-filter",
+    "fmt",
+    "json",
+] }
+tracing-appender = "0.2.3"
+tracing-log = "0.2.0"
+
+# Time handling
+chrono = { version = "0.4.42", features = ["serde"] }
+
+[dev-dependencies]
+tempfile = "3.23.0"
