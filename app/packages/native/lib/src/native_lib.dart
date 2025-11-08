@@ -44,11 +44,14 @@ class NativeLib {
 
     // Список путей для поиска библиотеки
     final searchPaths = <String>[
-      // 1. В пакете native/lib/ (после сборки через build.dart) - абсолютный путь
+      'packages/native/$libFileName',
+      // 1. Относительно корня приложения (для Flutter приложения)
+      'packages/native/lib/$libFileName',
+      // 2. В пакете native/lib/ (после сборки через build.dart) - абсолютный путь
       '${_getPackageRoot()}/lib/$libFileName',
-      // 2. Для тестов внутри пакета
+      // 3. Для тестов внутри пакета
       'lib/$libFileName',
-      // 3. Dev режим - прямо из core/target/debug
+      // 4. Dev режим - прямо из core/target/debug
       '${_getPackageRoot()}/../../../core/target/debug/libliquifly.dylib',
       '../../core/target/debug/libliquifly.dylib',
       '../core/target/debug/libliquifly.dylib',
@@ -63,6 +66,7 @@ class NativeLib {
     final libFileName = 'linux_$arch.so';
 
     final searchPaths = <String>[
+      'packages/native/lib/$libFileName',
       '${_getPackageRoot()}/lib/$libFileName',
       'lib/$libFileName',
       '${_getPackageRoot()}/../../../core/target/debug/libliquifly.so',
@@ -79,6 +83,7 @@ class NativeLib {
     final libFileName = 'windows_$arch.dll';
 
     final searchPaths = <String>[
+      'packages/native/lib/$libFileName',
       '${_getPackageRoot()}/lib/$libFileName',
       'lib/$libFileName',
       '${_getPackageRoot()}/../../../core/target/debug/liquifly.dll',
