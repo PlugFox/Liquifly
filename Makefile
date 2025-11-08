@@ -1,4 +1,4 @@
-.PHONY: help check build test clean fmt clippy doc all info init watch
+.PHONY: help check build test clean fmt clippy doc all info init watch bindings
 
 # Default target
 help:
@@ -10,6 +10,7 @@ help:
 	@echo "  make build-release   - Build optimized release"
 	@echo "  make build-small     - Build smallest binary (~4.1 MB)"
 	@echo "  make build-fast      - Build fastest runtime (fat LTO)"
+	@echo "  make bindings        - Generate Dart FFI bindings"
 	@echo ""
 	@echo "🧪 Test Commands:"
 	@echo "  make test            - Run all tests"
@@ -34,6 +35,10 @@ help:
 	@echo "  make flutter-run     - Run Flutter app"
 	@echo "  make flutter-build-apk  - Build Android APK"
 	@echo "  make flutter-build-ios  - Build iOS app"
+	@echo ""
+	@echo "🎯 Quick Start:"
+	@echo "  make init            - Initialize everything"
+	@echo "  make run             - Build Rust + Generate bindings + Run Flutter"
 
 # Quick check
 check:
@@ -127,9 +132,22 @@ init:
 	@echo "🎬 Initializing project..."
 	@echo "Installing Rust toolchain..."
 	rustup component add rustfmt clippy
-	@echo "Checking Flutter..."
-	flutter doctor
+	@echo "Getting Flutter dependencies..."
+	cd app && flutter pub get
+	@echo "Generating Dart bindings..."
+	$(MAKE) bindings
 	@echo "✅ Initialization complete!"
+
+# Generate Dart FFI bindings from C header
+bindings:
+	@echo "🔗 Generating Dart FFI bindings..."
+	cd app && dart run ffigen --config ffigen.yaml
+
+# Build Rust library and generate bindings
+prepare: build bindings
+
+# Quick run: build + bindings + run Flutter
+run: build bindings flutter-run
 
 # Show project info
 info:

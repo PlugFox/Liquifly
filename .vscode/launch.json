@@ -2,9 +2,22 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "app:debug",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "cwd": "${workspaceFolder}/app",
+            "args": [
+                //"--dart-define-from-file=config/staging.env",
+                //"--flavor=staging"
+            ]
+            /* "preLaunchTask": "dart:build_runner:all" */
+        },
+        {
+            "name": "core:debug:lib",
             "type": "lldb",
             "request": "launch",
-            "name": "core:debug:lib",
             "cargo": {
                 "args": [
                     "build",
@@ -20,9 +33,9 @@
             "preLaunchTask": "core:cargo:build"
         },
         {
+            "name": "core:debug:tests",
             "type": "lldb",
             "request": "launch",
-            "name": "core:debug:tests",
             "cargo": {
                 "args": [
                     "test",
@@ -38,9 +51,9 @@
             "cwd": "${workspaceFolder}/core"
         },
         {
+            "name": "core:debug:bench",
             "type": "lldb",
             "request": "launch",
-            "name": "core:debug:bench",
             "cargo": {
                 "args": [
                     "bench",
