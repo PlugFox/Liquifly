@@ -1,5 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:liquifly/src/bridge/native_lib.dart';
+import 'package:native/native.dart';
+import 'package:test/test.dart';
 
 void main() {
   group('Counter FFI Tests', () {

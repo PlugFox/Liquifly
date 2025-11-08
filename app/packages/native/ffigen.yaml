@@ -1,11 +1,11 @@
 # FFI bindings configuration
-name: 'NativeLibrary'
-description: 'Bindings to Liquifly Rust library'
-output: 'lib/src/bridge/native_bindings.dart'
+name: "NativeLibrary"
+description: "Bindings to Liquifly Rust library"
+output: "lib/src/native_bindings.dart"
 
 headers:
   entry-points:
-    - '../core/liquifly.h'
+    - "../../../core/liquifly.h"
 
 preamble: |
   // ignore_for_file: always_specify_types

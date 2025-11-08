@@ -141,13 +141,18 @@ init:
 # Generate Dart FFI bindings from C header
 bindings:
 	@echo "🔗 Generating Dart FFI bindings..."
-	cd app && dart run ffigen --config ffigen.yaml
+	cd app/packages/native && dart run ffigen --config ffigen.yaml
+
+# Build Rust library and copy to native package
+build-native: build
+	@echo "📦 Copying Rust library to native package..."
+	cd app/packages/native && dart bin/build.dart
 
 # Build Rust library and generate bindings
-prepare: build bindings
+prepare: build-native bindings
 
 # Quick run: build + bindings + run Flutter
-run: build bindings flutter-run
+run: build-native bindings flutter-run
 
 # Show project info
 info:

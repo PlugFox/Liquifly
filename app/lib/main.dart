@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'src/bridge/native_lib.dart';
+import 'package:native/native.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,9 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counterValue',
               style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ),
             const SizedBox(height: 40),
             const Text(
