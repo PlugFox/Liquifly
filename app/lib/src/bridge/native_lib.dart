@@ -30,19 +30,19 @@ class NativeLib {
     } else if (Platform.isIOS) {
       return ffi.DynamicLibrary.process();
     } else if (Platform.isMacOS) {
-      // В dev режиме ищем в core/target/debug
-      try {
-        return ffi.DynamicLibrary.open('core/target/debug/lib$libName.dylib');
-      } catch (_) {
-        // Пробуем относительный путь
-        return ffi.DynamicLibrary.open('../core/target/debug/lib$libName.dylib');
-      }
+      // В dev режиме библиотека находится в ../../../../../../core/target/debug/
+      // относительно app/build/macos/Build/Products/Debug/
+      return ffi.DynamicLibrary.open(
+        '../../../../../../core/target/debug/lib$libName.dylib',
+      );
     } else if (Platform.isLinux) {
       return ffi.DynamicLibrary.open('lib$libName.so');
     } else if (Platform.isWindows) {
       return ffi.DynamicLibrary.open('$libName.dll');
     }
-    throw UnsupportedError('Platform ${Platform.operatingSystem} is not supported');
+    throw UnsupportedError(
+      'Platform ${Platform.operatingSystem} is not supported',
+    );
   }
 }
 
@@ -87,4 +87,3 @@ class Counter {
     }
   }
 }
-
