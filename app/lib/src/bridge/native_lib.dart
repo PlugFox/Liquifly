@@ -1,5 +1,5 @@
 import 'dart:ffi' as ffi;
-import 'dart:io' show Platform;
+import 'dart:io' show Platform, File;
 
 import 'native_bindings.dart';
 
@@ -30,11 +30,24 @@ class NativeLib {
     } else if (Platform.isIOS) {
       return ffi.DynamicLibrary.process();
     } else if (Platform.isMacOS) {
-      // В dev режиме библиотека находится в ../../../../../../core/target/debug/
-      // относительно app/build/macos/Build/Products/Debug/
-      return ffi.DynamicLibrary.open(
+      // Пробуем разные пути для dev окружения
+      final possiblePaths = [
+        // Для тестов (из app/test/)
+        '../core/target/debug/lib$libName.dylib',
+        // Для приложения (из app/build/macos/.../liquifly.app/Contents/MacOS/)
         '../../../../../../core/target/debug/lib$libName.dylib',
-      );
+        // Попытка найти в текущей директории
+        'core/target/debug/lib$libName.dylib',
+      ];
+
+      for (final path in possiblePaths) {
+        if (File(path).existsSync()) {
+          return ffi.DynamicLibrary.open(path);
+        }
+      }
+
+      // Если ничего не найдено, пробуем первый путь и получим подробную ошибку
+      return ffi.DynamicLibrary.open(possiblePaths.first);
     } else if (Platform.isLinux) {
       return ffi.DynamicLibrary.open('lib$libName.so');
     } else if (Platform.isWindows) {
